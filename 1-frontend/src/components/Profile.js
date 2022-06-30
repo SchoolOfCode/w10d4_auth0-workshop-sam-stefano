@@ -4,10 +4,11 @@ import { useEffect } from "react";
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userMetadata, setUserMetadata] = useState(null);
+  const authDomain = process.env.REACT_APP_DOMAIN;
 
   useEffect(() => {
     const getUserMetadata = async () => {
-      const domain = "syywu-projects.eu.auth0.com";
+      const domain = { authDomain };
 
       try {
         const accessToken = await getAccessTokenSilently({
