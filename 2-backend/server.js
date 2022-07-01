@@ -1,9 +1,12 @@
 import express from "express";
 import { auth, requiredScopes } from "express-oauth2-jwt-bearer";
+import cookieParser from "cookie-parser";
 
 const checkScopes = requiredScopes("read:messages");
 const app = express();
 const port = 8000;
+
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
