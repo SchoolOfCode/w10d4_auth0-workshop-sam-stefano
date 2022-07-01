@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 const authDomain = process.env.REACT_APP_DOMAIN;
 
 const Profile = () => {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  console.log(getAccessTokenSilently());
+  const { user, isAuthenticated, getAccessTokenSilently, Loading } = useAuth0();
   const [userMetadata, setUserMetadata] = useState(null);
 
   useEffect(() => {
@@ -17,6 +16,7 @@ const Profile = () => {
           audience: `https://${domain}/api/v2/`,
           scope: "read:current_user",
         });
+        console.log(getAccessTokenSilently());
 
         const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
 
@@ -35,7 +35,14 @@ const Profile = () => {
     };
 
     getUserMetadata();
+    console.log(userMetadata);
   }, [getAccessTokenSilently, user?.sub]);
+
+  console.log(userMetadata);
+
+  if (Loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     isAuthenticated && (
