@@ -1,10 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 
+const authDomain = process.env.REACT_APP_DOMAIN;
+
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  console.log(getAccessTokenSilently());
   const [userMetadata, setUserMetadata] = useState(null);
-  const authDomain = process.env.REACT_APP_DOMAIN;
 
   useEffect(() => {
     const getUserMetadata = async () => {
